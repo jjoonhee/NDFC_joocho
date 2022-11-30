@@ -6,7 +6,7 @@ def talk_about_API_action():
     
     select_method = input("Select action you want:\n\
             1. Get Switches Management IP\n\
-            2. Get Alarms Counter Info\n\
+            2. Get Alarms Info\n\
             3. Delete Alarms\nYour input is : \
         ")
     while True:
@@ -14,8 +14,8 @@ def talk_about_API_action():
             pprint(obj_joocho.getSwitchMgmt())
             break
         elif select_method == "2":
-            pprint(f"Alarms Counter: {len(obj_joocho.getAlarms())}")
-            clear_var = input("Do you want clear the alarms? Y/n")
+            obj_joocho.returnAlmMsg()
+            clear_var = input("\033[95mDo you want clear the alarms? Y/n\033[0m ")
             clear_var = clear_var.upper()
             while True:
                 if clear_var == "Y":
@@ -25,7 +25,7 @@ def talk_about_API_action():
                     break
                 else:
                     pprint("Wrong Input please input Y or N")
-                    clear_var = input("Do you want clear the alarms? Y/n")
+                    clear_var = input("\033[95mDo you want clear the alarms? Y/n\033[0m ")
             break
         elif select_method == "3":
             pprint(obj_joocho.deleteAlarms())
