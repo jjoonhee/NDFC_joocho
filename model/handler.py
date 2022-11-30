@@ -1,9 +1,10 @@
 import requests
 import os
 import json
+import pprint as pprint
 requests.packages.urllib3.disable_warnings(requests.packages.urllib3.exceptions.InsecureRequestWarning)
 
-
+update_date = "Last Updated date : 2022.11.30, joocho"
 
 class Login_NDFC():
     __doc__="Hello"
@@ -33,7 +34,8 @@ class Login_NDFC():
 class NDFC_api(Login_NDFC):
     __doc__="Hello"
     def __init__(self):
-        print("=" * 20 + "NDFC API easy Excutorservice" + "=" * 20)
+        print("\033[95m" + "=" * 20 + "NDFC API easy Excutorservice" + "=" * 20)
+        print(f"{update_date:>68}\n\033[0m")
         login_input = input("Insert your NDFC MgmtIP: ")
         while True:
             try:
@@ -72,27 +74,42 @@ class NDFC_api(Login_NDFC):
         return mgmt_IP
 
 
-    def getAlarms(self):
+    def getAlarmsID(self):
         id_list = []
+        self.res_result = []
         url = f"https://{self.login_input}/appcenter/cisco/ndfc/api/v1/alarm/alarms/alarmlist?filter=device%3D%3D"
         for k in self.getSwitchMgmt():
             response = requests.request("GET", url + k, headers=self.headers, verify=False)
             response_dict = json.loads(response.text)
             response_dict = response_dict["lastOperDataObject"]
+            self.res_result.append(response_dict)
             for val in response_dict:
                 id_list.append(val["id"])
         if id_list == []:
             print("There is no alarm.\nClosing...")
             exit()
-        return id_list
+        return id_list, self.res_result[0]
 
 
     def deleteAlarms(self):
         url = f"https://{self.login_input}/appcenter/cisco/ndfc/api/v1/alarm/alarms/deletealarms"
-        payload = json.dumps({"alarmId":self.getAlarms(),"actBy":self.response["username"]})
+        payload = json.dumps({"alarmId":self.getAlarmsID(),"actBy":self.response["username"]})
         response = requests.request("POST", url, headers = self.headers, data = payload, verify = False)
         if response.status_code == 200:
             print("DELETE Excution complete.")
-        if self.getAlarms() != []:
+        if self.getAlarmsID() != []:
             self.deleteAlarms()
         exit()
+
+    def returnAlmMsg(self):
+        n = 0
+        alarm_ID, res_contents = self.getAlarmsID()
+        inner_list = []
+        msg_dict = {"Info" : inner_list}
+        for msg in res_contents:
+            inner_list.append("Device = " + msg["deviceName"] + ", Message = " + msg["message"])
+        for idx, val in enumerate(msg_dict["Info"]):
+            print(f"Index: {idx}\n -> {val}")
+
+test = NDFC_api()
+test.returnAlmMsg()

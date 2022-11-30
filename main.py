@@ -1,11 +1,12 @@
-import controller.handler as handler
+from controller.conversation import *
 import pprint
 
+
 def main():
-    joocho = handler.NDFC_api()
-    pprint.pprint(joocho.deleteAlarms())
+    talk_about_API_action()
 
 if __name__ == "__main__":
     main()
 else:
     exit()
+    
