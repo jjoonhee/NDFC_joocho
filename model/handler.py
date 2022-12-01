@@ -34,7 +34,7 @@ class Login_NDFC():
 class NDFC_api(Login_NDFC):
     __doc__="Hello"
     def __init__(self):
-        print("\033[95m" + "=" * 20 + "NDFC API easy Excutorservice" + "=" * 20)
+        print("\033[95m" + "=" * 20 + "NDFC API easy Excutor Service" + "=" * 20)
         print(f"{update_date:>68}\n\033[0m")
         login_input = input("Insert your NDFC MgmtIP: ")
         while True:
