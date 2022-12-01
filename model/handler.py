@@ -118,4 +118,3 @@ class NDFC_api(Login_NDFC):
             print(f"Index: {idx}\n -> {val}")
             total_alm_count += 1
         print(f"Total Alarm Count = {total_alm_count}")
-        #print(inner_list)
