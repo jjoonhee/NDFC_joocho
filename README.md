@@ -13,4 +13,5 @@
 # python ./main.py
 
 ## Initial Screen
-![이미지 5](https://user-images.githubusercontent.com/88135948/204986152-de79b041-8f78-4c7f-8ccb-07abfdba411d.jpg)
+
+![이미지 6](https://user-images.githubusercontent.com/88135948/204987683-592ab8de-4f61-4997-a8a4-9a3019a02609.jpg)
