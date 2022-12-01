@@ -4,7 +4,7 @@ import json
 import pprint as pprint
 requests.packages.urllib3.disable_warnings(requests.packages.urllib3.exceptions.InsecureRequestWarning)
 
-update_date = "Last Updated date : 2022.11.30, joocho"
+update_date = "Last Updated date : 2022.12.1, joocho"
 
 class Login_NDFC():
     __doc__="Hello"
