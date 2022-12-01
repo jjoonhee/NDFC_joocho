@@ -73,6 +73,18 @@ class NDFC_api(Login_NDFC):
         mgmt_IP.sort()
         return mgmt_IP
 
+    def getSwitchStatus(self):
+        sum_status = {}
+        url = f"https://{self.login_input}/appcenter/cisco/ndfc/api/v1/lan-fabric/rest/inventory/allswitches"
+        response = requests.request("GET", url, headers = self.headers, data = self.payload, verify = False)
+        res = json.loads(response.text)
+        for k in range(len(res)):
+            sum_status[res[k]["logicalName"]] = {"ccStatus" : "", "fabricName" : "", "ipAddress": ""}
+            sum_status[res[k]["logicalName"]]["ccStatus"] = res[k]["ccStatus"]
+            sum_status[res[k]["logicalName"]]["fabricName"] = res[k]["fabricName"]
+            sum_status[res[k]["logicalName"]]["ipAddress"] = res[k]["ipAddress"]
+        return sum_status
+
 
     def getAlarmInfo(self):
         id_list = []
@@ -118,3 +130,7 @@ class NDFC_api(Login_NDFC):
             print(f"Index: {idx}\n -> {val}")
             total_alm_count += 1
         print(f"Total Alarm Count = {total_alm_count}")
+
+
+#test = NDFC_api()
+#test.getSwitchStatus()
