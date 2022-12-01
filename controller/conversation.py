@@ -11,7 +11,7 @@ def talk_about_API_action():
         ")
     while True:
         if select_method == "1":
-            pprint(f"Management IP =\n{obj_joocho.getSwitchMgmt()}")
+            pprint(f"Management IP = {obj_joocho.getSwitchMgmt()}")
             break
         elif select_method == "2":
             pprint(obj_joocho.getSwitchStatus())
