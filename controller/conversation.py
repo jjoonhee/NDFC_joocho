@@ -1,9 +1,10 @@
 from model.handler import *
 from pprint import pprint
 
+
 def talk_about_API_action():
     obj_joocho = NDFC_api()
-    select_method = input("Select action you want:\n\
+    select_method = input(f"{start_magenta}Select action you want:{end_color}\n\
             1. Get Switches Management IP\n\
             2. Get Switches status\n\
             3. Get Alarms Info\n\
@@ -18,8 +19,7 @@ def talk_about_API_action():
             break
         elif select_method == "3":
             obj_joocho.returnAlmMsg()
-            clear_var = input("\033[95mDo you want clear the alarms? Y/n\033[0m ")
-            clear_var = clear_var.upper()
+            clear_var = input(f"{start_magenta}Do you want clear the alarms? Y/n{end_color} ").upper()
             while True:
                 if clear_var == "Y":
                     obj_joocho.deleteAlarms()
@@ -27,13 +27,13 @@ def talk_about_API_action():
                 elif clear_var == "N":
                     break
                 else:
-                    pprint("Wrong Input please input Y or N")
-                    clear_var = input("\033[95mDo you want clear the alarms? Y/n\033[0m ")
+                    print(f"{start_red}Wrong Input please input Y or N{end_color}")
+                    clear_var = input(f"{start_magenta}Do you want clear the alarms? Y/n{end_color} ").upper()
             break
         elif select_method == "4":
             pprint(obj_joocho.deleteAlarms())
         else:
-            print("Wrong input. Try again\n")
+            print(f"{start_red}Wrong input. Try again{end_color}\n")
             select_method = input("""Select action you want:
                 1. Get Switches Management IP
                 2. Get Alarms ID Info

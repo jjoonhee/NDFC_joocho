@@ -4,6 +4,9 @@ import json
 import pprint as pprint
 requests.packages.urllib3.disable_warnings(requests.packages.urllib3.exceptions.InsecureRequestWarning)
 
+start_magenta = "\033[95m"
+start_red = "\033[31m"
+end_color = "\033[0m"
 update_date = "Last Updated date : 2022.12.1, joocho"
 
 class Login_NDFC():
@@ -22,11 +25,11 @@ class Login_NDFC():
                 response = requests.request("POST", self.url, headers={'Content-Type': 'application/json'}, data=self.payload, verify=False)
                 response = json.loads(response.text)
                 if response["statusCode"] == 200:
-                    print("Authentication success")
+                    print(f"{start_magenta}Authentication success{end_color}")
                     self.response = response
                     break
             except:
-                print("Authentication failed, Check your username/Password")
+                print(f"{start_red}Authentication failed, Check your username/Password{end_color}")
                 self.userName = input("Insert your username: ")
                 self.passWd = input("Insert your password: ")
     
@@ -48,15 +51,15 @@ class NDFC_api(Login_NDFC):
                     break
             except requests.exceptions.Timeout as errd:
                 print("Timeout Error : ", errd)
-                login_input = input("IP is not valid, Try again\nNDFC MgmtIP: ")
+                login_input = input(f"{start_red}IP is not valid, Try again{end_color}\nNDFC MgmtIP: ")
             except requests.exceptions.ConnectionError as errc:
                 print("Error Connecting : ", errc)
-                login_input = input("IP is not valid, Try again\nNDFC MgmtIP: ")
+                login_input = input(f"{start_red}IP is not valid, Try again{end_color}\nNDFC MgmtIP: ")
             except requests.exceptions.HTTPError as errb:
                 print("Http Error : ", errb)
-                login_input = input("IP is not valid, Try again\nNDFC MgmtIP: ")
+                login_input = input(f"{start_red}IP is not valid, Try again{end_color}\nNDFC MgmtIP: ")
             except:
-                login_input = input("IP is not valid, Try again\nNDFC MgmtIP: ")
+                login_input = input(f"{start_red}IP is not valid, Try again{end_color}\nNDFC MgmtIP: ")
         self.loginNDFC()
         self.headers = {
             'Content-Type': 'application/json',
@@ -89,9 +92,11 @@ class NDFC_api(Login_NDFC):
     def getAlarmInfo(self):
         id_list = []
         self.res_result = []
+        self.call_time = int()
         url = f"https://{self.login_input}/appcenter/cisco/ndfc/api/v1/alarm/alarms/alarmlist?filter=device%3D%3D"
         for k in self.getSwitchMgmt():
             response = requests.request("GET", url + k, headers=self.headers, verify=False)
+            self.call_time += response.elapsed.total_seconds()
             response_dict = json.loads(response.text)
             response_dict = response_dict["lastOperDataObject"]
             if response_dict == []:
@@ -127,9 +132,9 @@ class NDFC_api(Login_NDFC):
             for msg in res_contents[idx]:
                 inner_list.append("Device = " + msg["deviceName"] + ", Message = " + msg["message"])
         for idx, val in enumerate(msg_dict["Info"]):
-            print(f"Index: {idx}\n -> {val}")
+            print(f"Index: {idx+1}\n -> {val}")
             total_alm_count += 1
-        print(f"Total Alarm Count = {total_alm_count}")
+        print(f"{start_magenta}Total Alarm Count = {total_alm_count}\nTotal API call time = {self.call_time:.3f} seconds.{end_color}")
 
 
 #test = NDFC_api()
