@@ -45,7 +45,7 @@ class NDFC_api(Login_NDFC):
                 url = f"https://{login_input}/login"
                 response = requests.request("GET", url, verify=False, timeout=2)
                 if response.status_code == 200:
-                    print("###Reachability verified###\n")
+                    print(f"{start_magenta} ###Reachability verified### {end_color}\n")
                     self.login_input = login_input
                     self.url = url
                     break
