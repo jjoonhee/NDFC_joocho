@@ -7,6 +7,7 @@
 > ### 3. Alarm
 > > #### Get Alarms
 > > #### Delete Alarms
+> ### 4. Rediscover switches
 
 
 
