@@ -38,11 +38,12 @@ def talk_about_API_action():
             fin_var = 999
         else:
             print(f"{start_red}Wrong input. Try again{end_color}\n")
-            select_method = input("""Select action you want:
-                1. Get Switches Management IP
-                2. Get Alarms ID Info
-                3. Delete Alarms
-                Your input is : """)
+            select_method = input(f"{start_magenta}Select action you want:{end_color}\n\
+                1. Get Switches Management IP\n\
+                2. Get Switches status\n\
+                3. Get Alarms Info\n\
+                4. Delete Alarms\n\
+                5. Rediscover All switches\n Your input is : ")
         if fin_var == 999:
             fin_go = input("Wanna continue? Y/n").upper()
             if fin_go == "Y":
