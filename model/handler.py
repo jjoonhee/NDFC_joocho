@@ -169,7 +169,7 @@ class NDFC_api(Login_NDFC):
                 if (len(tmp_list) == 1 and ("Rediscovering" not in tmp_list) and ("ok" in tmp_list)):
                     print("All swiches are discovered")
                     for k,v in self.getSwitchStatus()[0].items():
-                        print(k,"=",v["Discover_status"])
+                        print("Discover status(", k ,") = ",v["Discover_status"])
                     return response
                 elif ("Rediscovering" in tmp_list):
                     print("Discovering...")
