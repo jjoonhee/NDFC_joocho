@@ -105,7 +105,7 @@ class NDFC_api(Login_NDFC):
 
 
     def getAlarmInfo(self):
-        id_list = []
+        self.id_list = []
         self.res_result = []
         self.call_time = int()
         url = f"https://{self.login_input}/appcenter/cisco/ndfc/api/v1/alarm/alarms/alarmlist?filter=device%3D%3D"
@@ -120,25 +120,33 @@ class NDFC_api(Login_NDFC):
                 self.res_result.append(response_dict)
         for idx in range(len(self.res_result)):
             for val in self.res_result[idx]:
-                id_list.append(val["id"])
+                self.id_list.append(val["id"])
         #print("*"*20 + str(len(self.res_result)) + "*"*20)
-        if id_list == []:
-            print("There is no alarm.\nClosing...")
-        return id_list, self.res_result
+        return self.id_list, self.res_result
 
 
     def deleteAlarms(self):
         url = f"https://{self.login_input}/appcenter/cisco/ndfc/api/v1/alarm/alarms/deletealarms"
-        payload = json.dumps({"alarmId":self.getAlarmInfo()[0],"actBy":self.response["username"]})
-        response = requests.request("POST", url, headers = self.headers, data = payload, verify = False)
-        if response.status_code == 200:
-            print("DELETE Excution complete.")
-        if self.getAlarmInfo()[0] != []:
-            self.deleteAlarms()
+        self.res_id = self.getAlarmInfo()[0]
+        if len(self.res_id) == 0:
+            print("NO alarms")
+            return 1
+        else:
+            payload = json.dumps({"alarmId":self.res_id,"actBy":self.response["username"]})
+            response = requests.request("POST", url, headers = self.headers, data = payload, verify = False)
+            if response.status_code == 200:
+                print("DELETE Excution complete.")
+            if len(self.res_id) != 0:
+                self.res_id = self.getAlarmInfo()[0]
+                self.deleteAlarms()
+            
 
     def returnAlmMsg(self):
         total_alm_count = 0
-        alarm_ID, res_contents = self.getAlarmInfo()
+        self.alarm_ID, res_contents = self.getAlarmInfo()
+        if len(self.alarm_ID) == 0:
+            print("NO alarms")
+            return 0
         inner_list = []
         msg_dict = {"Info" : inner_list}
         for idx in tqdm(range(len(res_contents))):
@@ -148,6 +156,8 @@ class NDFC_api(Login_NDFC):
             print(f"Index: {idx+1}\n -> {val}")
             total_alm_count += 1
         print(f"{start_magenta}Total Alarm Count = {total_alm_count}\nTotal API call time = {self.call_time:.3f} seconds.{end_color}")
+        return self.alarm_ID
+
     
     def rediscoverSwitch(self):
         sw_payload = self.getSwitchStatus()[1]

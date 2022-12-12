@@ -18,20 +18,23 @@ def talk_about_API_action():
             pprint(obj_joocho.getSwitchStatus()[0])
             fin_var = 999
         elif select_method == "3":
-            obj_joocho.returnAlmMsg()
-            clear_var = input(f"\n{start_magenta}Do you want clear the alarms? Y/n{end_color} ").upper()
-            while True:
-                if clear_var == "Y":
-                    obj_joocho.deleteAlarms()
-                    fin_var = 999
-                elif clear_var == "N":
-                    fin_var = 999
-                    break
-                else:
-                    print(f"{start_red}Wrong Input please input Y or N{end_color}")
-                    clear_var = input(f"{start_magenta}Do you want clear the alarms? Y/n{end_color} ").upper()
+            if bool(obj_joocho.returnAlmMsg()) is False:
+                continue
+            else:
+                clear_var = input(f"\n{start_magenta}Do you want to clear the alarms? Y/n{end_color} ").upper()
+                while True:
+                    if clear_var == "Y":
+                        obj_joocho.deleteAlarms()
+                        fin_var = 999
+                        break
+                    elif clear_var == "N":
+                        fin_var = 999
+                        break
+                    else:
+                        print(f"{start_red}Wrong Input please input Y or N{end_color}")
+                        clear_var = input(f"{start_magenta}Do you want to clear the alarms? Y/n{end_color} ").upper()
         elif select_method == "4":
-            pprint(obj_joocho.deleteAlarms())
+            obj_joocho.deleteAlarms()
             fin_var = 999
         elif select_method == "5":
             print(obj_joocho.rediscoverSwitch()["resultMessage"])
