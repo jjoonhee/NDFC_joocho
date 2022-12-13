@@ -12,14 +12,14 @@ def talk_about_API_action():
             4. Delete Alarms\n\
             5. Rediscover All switches\n*Press 0(Zero) if you wanna close\n Your input is : """)
         if select_method == "1":
-            pprint(f"Management IP = {obj_joocho.getSwitchMgmt()}")
+            pprint(f"Management IP = {obj_joocho.getSwitchMgmt()}", indent = 4)
             fin_var = 999
         elif select_method == "2":
             pprint(obj_joocho.getSwitchStatus()[0])
             fin_var = 999
         elif select_method == "3":
             if bool(obj_joocho.returnAlmMsg()) is False:
-                continue
+                fin_var = 999
             else:
                 clear_var = input(f"\n{start_magenta}Do you want to clear the alarms? Y/n{end_color} ").upper()
                 while True:
@@ -49,15 +49,17 @@ def talk_about_API_action():
                 2. Get Switches status\n\
                 3. Get Alarms Info\n\
                 4. Delete Alarms\n\
-                5. Rediscover All switches\n*Press 0(Zero) if you wanna close\n Your input is : """)
+                5. Rediscover All switches\n\n*Press 0(Zero) if you wanna close\n Your input is : """)
         if fin_var == 999:
-            fin_go = input("Wanna continue? Y/n").upper()
-            if fin_go == "Y":
-                continue
-            elif fin_go == "N":
-                break
-            else:
-                print("Wrong Input\n")
+            while True:
+                fin_go = input("Wanna continue? Y/n ").upper()
+                if fin_go == "Y":
+                    break
+                elif fin_go == "N":
+                    print("Closing...\n")
+                    exit()
+                else:
+                    print("Wrong Input\n")
         else:
             pass
     pprint("Closing...")
