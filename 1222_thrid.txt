@@ -1,0 +1,11 @@
+2022 Jul  8 06:01:58.062 as29a.e2819b.n93108t.krlgp %DAEMON-3-SYSTEM_MSG: corrected Socket memory error count exceeded threshold: 100 in 24h - mcelog
+2022 Sep 15 04:42:52.051 as29a.e2819b.n93108t.krlgp %DAEMON-3-SYSTEM_MSG: corrected Socket memory error count exceeded threshold: 100 in 24h - mcelog
+2022 Sep 24 10:27:05.028 as29a.e2819b.n93108t.krlgp %DAEMON-3-SYSTEM_MSG: corrected Socket memory error count exceeded threshold: 200 in 24h - mcelog
+2022 Sep 26 19:40:27.135 as29a.e2819b.n93108t.krlgp %DAEMON-3-SYSTEM_MSG: corrected Socket memory error count exceeded threshold: 300 in 24h - mcelog
+2022 Oct 20 13:30:49.628 as29a.e2819b.n93108t.krlgp %DAEMON-3-SYSTEM_MSG: corrected Socket memory error count exceeded threshold: 508 in 24h - mcelog
+2022 Oct 21 18:07:29.422 as29a.e2819b.n93108t.krlgp %DAEMON-3-SYSTEM_MSG: corrected Socket memory error count exceeded threshold: 608 in 24h - mcelog
+2022 Oct 24 17:39:10.171 as29a.e2819b.n93108t.krlgp %DAEMON-3-SYSTEM_MSG: corrected Socket memory error count exceeded threshold: 100 in 24h - mcelog
+2022 Oct 27 21:56:58.740 as29a.e2819b.n93108t.krlgp %DAEMON-3-SYSTEM_MSG: corrected Socket memory error count exceeded threshold: 505 in 24h - mcelog
+2022 Nov  9 19:54:14.173 as29a.e2819b.n93108t.krlgp %DAEMON-3-SYSTEM_MSG: corrected Socket memory error count exceeded threshold: 605 in 24h - mcelog
+2022 Nov 11 07:40:05.056 as29a.e2819b.n93108t.krlgp %DAEMON-3-SYSTEM_MSG: corrected Socket memory error count exceeded threshold: 705 in 24h - mcelog
+2022 Dec  3 06:35:28.449 as29a.e2819b.n93108t.krlgp %DAEMON-3-SYSTEM_MSG: corrected Socket memory error count exceeded threshold: 905 in 24h - mcelog

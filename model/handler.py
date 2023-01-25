@@ -5,6 +5,7 @@ import pprint as pprint
 import time
 import sys
 import subprocess
+import colordict
 requests.packages.urllib3.disable_warnings(requests.packages.urllib3.exceptions.InsecureRequestWarning)
 
 start_magenta = "\033[95m"
@@ -101,6 +102,8 @@ class NDFC_api(Login_NDFC):
             sum_status[self.res[k]["logicalName"]]["fabricName"] = self.res[k]["fabricName"]
             sum_status[self.res[k]["logicalName"]]["ipAddress"] = self.res[k]["ipAddress"]
             sum_status[self.res[k]["logicalName"]]["Discover_status"] = self.res[k]["status"]
+            if sum_status[self.res[k]["logicalName"]]["Discover_status"] == "Unreachable":
+                sum_status[self.res[k]["logicalName"]]["Discover_status"] = "Unreachable <-- Check the reachability"
         return sum_status, self.res
 
 

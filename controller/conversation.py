@@ -1,6 +1,6 @@
 from model.handler import *
 from pprint import pprint
-
+from rich import print
 
 def talk_about_API_action():
     obj_joocho = NDFC_api()
@@ -16,7 +16,7 @@ def talk_about_API_action():
             pprint(f"Management IP = {obj_joocho.getSwitchMgmt()}", indent = 4)
             fin_var = True
         elif select_method == "2":
-            pprint(obj_joocho.getSwitchStatus()[0])
+            print(obj_joocho.getSwitchStatus()[0])
             fin_var = True
         elif select_method == "3":
             if bool(obj_joocho.returnAlmMsg()) is False:
